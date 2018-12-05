@@ -49,11 +49,17 @@ This was the basics of what im doing, Ill now move on to some of the more advanc
 I wanted the bubbles to be sorted neatly and semetricaly, a lot of my struggles came from finding the initial way to do this. Mainly because I overlooked the simple solution for a long time. I went over ways like making a line of symetry and treating the bubbles as points in a polygon and using the function (n-2)180 to find the angle between them. It took a while to realize that the easiest solution is to calculate the innner angle.
 
 As you can see at first I find the amount of bubbles there are
-    const bubblesAmnt = bubbles.length;
+```javascript 
+const bubblesAmnt = bubbles.length;
+```
 And use this to calculate the angle between the lines
-    const angle = 360 / bubblesAmnt;
+```javascript 
+const angle = 360 / bubblesAmnt;
+```
 Because each line has to be moved up one space this total angle for that bubble is calculated using the index
-    const bubbleAngle = angle * (index + 1);
+```javascript 
+const bubbleAngle = angle * (index + 1);
+```
 *Note* the * Math.PI / 180 in the following lines is used to transfer from radian to degree
 Knowing one angle and the length of the hypotenuse we can use trig to calcuate the x and y discplacement
 ```javascript
