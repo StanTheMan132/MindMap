@@ -83,7 +83,7 @@ const render = function render(){
         const width = Math.cos(bubbleAngle * Math.PI / 180) * textDistance;
         //  Log for debugging
         console.log(`bubblesAmnt ${bubblesAmnt}, angle ${angle}, height ${height}, width ${width}, index ${index + 1}, bubbleAngle ${bubbleAngle}`);
-        //  Set the right X and Y coardinates
+        //  Set the right X and Y coordinates 
         const y = centerCords.y + height;
         const x = centerCords.x + width;
 
