@@ -17,7 +17,8 @@ const centerCords = {x: canvasSize.x/2, y: canvasSize.y/2};
     For it makes the text whatever bubble number it is
 */
 canvas.addEventListener('click', () => { 
-    bubble = { text: bubbles.length +1 }; 
+    //  bubble = { text: bubbles.length +1 }; 
+    bubble = { text: "yeet" }; 
     bubbles.push(bubble);
     render();
 });
@@ -28,7 +29,7 @@ canvas.addEventListener('click', () => {
     Function to draw the text and cirlcle around it
     Circles are screwed right now I know still need to work on that
 */
-const addBubble = function addBubble(text, x, y, line, bubbleAngle) {
+const addBubble = function addBubble(text, x, y, line, bubbleAngle, angle) {
     const titleRadius = 75;
     text = text.toString();
 
@@ -36,7 +37,7 @@ const addBubble = function addBubble(text, x, y, line, bubbleAngle) {
     // Write text
     ctx.beginPath();
     ctx.font = "30px Arial";
-    ctx.fillText(text, x, y);
+    ctx.fillText(text, x, y + 10);
 
     // Calculate size of circle around text 
     // Needs to be changed to a better way as this is just using 30 as average
@@ -49,12 +50,18 @@ const addBubble = function addBubble(text, x, y, line, bubbleAngle) {
     ctx.stroke();
     
     if (line) {
-        //Calculate bubble ofset
+        //Calculate center bubble ofset
         const height = Math.sin(bubbleAngle * Math.PI / 180) * titleRadius;
         const width = Math.cos(bubbleAngle * Math.PI / 180) * titleRadius;
+
+        //  Calculate text bubble ofset
+        const textHeight = radius * Math.sin(bubbleAngle * Math.PI / 180)
+        const textWidth = radius * Math.cos(bubbleAngle * Math.PI / 180) ;
+        console.log(textWidth)
+
         // Draw line from text to middle
-        ctx.beginPath();
-        ctx.moveTo(x, y);
+        ctx.beginPath(); 
+        ctx.moveTo(x-textWidth, y-textHeight);
         ctx.lineTo(centerCords.x + width, centerCords.y + height);
         ctx.stroke();
     }
@@ -66,7 +73,7 @@ const addBubble = function addBubble(text, x, y, line, bubbleAngle) {
 const render = function render(){
 
     //  Clear the console, debugging purposes
-    console.clear();
+    //  console.clear();
 
     //  Delete everything on screen
     ctx.clearRect(0,0, 1000, 1000)
@@ -90,13 +97,13 @@ const render = function render(){
         const height = Math.sin(bubbleAngle * Math.PI / 180) * textDistance;
         const width = Math.cos(bubbleAngle * Math.PI / 180) * textDistance;
         //  Log for debugging
-        console.log(`bubblesAmnt ${bubblesAmnt}, angle ${angle}, height ${height}, width ${width}, index ${index + 1}, bubbleAngle ${bubbleAngle}`);
+        //  console.log(`bubblesAmnt ${bubblesAmnt}, angle ${angle}, height ${height}, width ${width}, index ${index + 1}, bubbleAngle ${bubbleAngle}`);
         //  Set the right X and Y coordinates 
         const y = centerCords.y + height;
         const x = centerCords.x + width;
 
         //  Draw the bubble
-        addBubble(bubble.text, x, y, true, bubbleAngle);
+        addBubble(bubble.text, x, y, true, bubbleAngle, angle);
     });
 }
 
