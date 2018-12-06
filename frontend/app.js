@@ -28,8 +28,11 @@ canvas.addEventListener('click', () => {
     Function to draw the text and cirlcle around it
     Circles are screwed right now I know still need to work on that
 */
-const addBubble = function addBubble(text, x, y) {
+const addBubble = function addBubble(text, x, y, line, bubbleAngle) {
+    const titleRadius = 75;
     text = text.toString();
+
+    ctx.textAlign="center";
     // Write text
     ctx.beginPath();
     ctx.font = "30px Arial";
@@ -45,12 +48,17 @@ const addBubble = function addBubble(text, x, y) {
     ctx.arc(x, y, radius, 0,2*Math.PI);
     ctx.stroke();
     
-
-    // Draw line from text to middle
-    ctx.beginPath();
-    ctx.moveTo(x, y)
-    ctx.lineTo(centerCords.x, centerCords.y)
-    ctx.stroke();
+    if (line) {
+        //Calculate bubble ofset
+        const height = Math.sin(bubbleAngle * Math.PI / 180) * titleRadius;
+        const width = Math.cos(bubbleAngle * Math.PI / 180) * titleRadius;
+        // Draw line from text to middle
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(centerCords.x + width, centerCords.y + height);
+        ctx.stroke();
+    }
+    
 }
 
 
@@ -64,7 +72,7 @@ const render = function render(){
     ctx.clearRect(0,0, 1000, 1000)
 
     //  Draw the title bubble
-    addBubble("Title", centerCords.x, centerCords.y);
+    addBubble("Title", centerCords.x, centerCords.y, false);
 
     //  Loop through the bubbles array
     bubbles.forEach((bubble, index) => {
@@ -88,7 +96,7 @@ const render = function render(){
         const x = centerCords.x + width;
 
         //  Draw the bubble
-        addBubble(bubble.text, x, y);
+        addBubble(bubble.text, x, y, true, bubbleAngle);
     });
 }
 
