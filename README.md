@@ -17,7 +17,7 @@ The math for this logic was quite difficult for me at first so here is a quick e
 
 *Note*: A basic understanding of geometry is required to understand this and trigenometry for the intermediate section
 
-### Beginer:
+### Beginner:
 The problem we need to solve is figuiring out the X and Y coordinates for a bubble
 The X and Y should take into  concidereation the location of the title in the middle and the distance it wants to be from this
 
